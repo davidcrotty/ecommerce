@@ -145,7 +145,7 @@ $(document).ready(function(){
         });
         
     var mainRemove = function($sorter){
-    	$($sorter).removeClass("fuckingwork");
+    	$($sorter).removeClass("sorter");
 	            
 	    $($sorter).find('i').remove();
 	    $($sorter).removeClass("selected");
@@ -154,9 +154,9 @@ $(document).ready(function(){
     
     $("div p").click(function(){
 
-        if($(this).hasClass("fuckingwork"))
+        if($(this).hasClass("sorter"))
         {
-            $(this).removeClass("fuckingwork");
+            $(this).removeClass("sorter");
             
             $(this).find('i').remove();
              $(this).removeClass("selected");
@@ -175,7 +175,7 @@ $(document).ready(function(){
         		});        		
         	}
         	
-            $(this).addClass("fuckingwork");
+            $(this).addClass("sorter");
             $(this).prepend('<i class="icon-stop"></i>');
             $(this).addClass("selected");
         }
@@ -282,7 +282,16 @@ $(document).ready(function(){
 				datatype: 'json',
 				data: "value="+query,	
 				success:function(result){
-					console.log(result);
+					
+					var htmlData = $.parseJSON(result);
+					//clear html in div tags
+					//fill with html
+					$('#productBody').empty();
+					for(var i = 0; i < htmlData.length; i++)
+					{
+						$('#productBody').append(htmlData[i]);	
+					}
+					
 				}
     			
     		});

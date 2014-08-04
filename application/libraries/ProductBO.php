@@ -14,9 +14,10 @@ class ProductBO {
     private $stock;
     private $productdescription;
     private $taxid;
+    private $productimg;
     
     //from memory
-    public function __construct($producttype,$productname,$productbrand,$productprice,$processor,$RAM,$graphics,$onoffer,$stock,$productdescription,$taxid)
+    public function __construct($producttype,$productname,$productbrand,$productprice,$processor,$RAM,$graphics,$onoffer,$stock,$productdescription,$taxid,$productimg)
     {
         $this->id = -1;
         $this->producttype = $producttype;
@@ -30,15 +31,15 @@ class ProductBO {
         $this->stock = $stock;
         $this->productdescription = $productdescription;
         $this->taxid = $taxid;
+        $this->productimg =$productimg;
        //set id to -1 
     }
-    
     
     
     //from db
     public static function fromHash($row)
     {
-        $object = new self($row->producttype,$row->productname,$row->productbrand,$row->productprice,$row->processor,$row->RAM,$row->graphics,$row->onoffer,$row->stock,$row->productdescription,$row->taxid);
+        $object = new self($row->producttype,$row->productname,$row->productbrand,$row->productprice,$row->processor,$row->RAM,$row->graphics,$row->onoffer,$row->stock,$row->productdescription,$row->taxid,$row->imagepath);
         $object->setId($row->productid);
         return $object;
     }
@@ -139,7 +140,13 @@ class ProductBO {
         $this->taxid = $taxid;
     }
     
-    
+    public function getProductimg(){
+        return $this->productimg;
+    }
+
+    public function setProductimg($productimg){
+        $this->productimg = $productimg;
+    }
     
 }
 

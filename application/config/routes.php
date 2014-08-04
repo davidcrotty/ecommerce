@@ -54,7 +54,7 @@ $route['registerBilling'] = "RegistrationController/registerBilling";
 $route['validate'] = "RegistrationController/validate";
 
 //products route
-$route['products'] = "ProductsController/viewProducts";
+$route['products'] = "ProductsController/getSideBar";
 $route['sidebar'] = "ProductsController/getSideBar";
 $route['refreshProducts'] = "ProductsController/refreshProducts"; 
 

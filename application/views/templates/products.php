@@ -74,7 +74,7 @@ echo'
     </ul>
     <div class="clearfix"></div>
   </div>
-  <div class="panel-body">
+  <div id="productBody" class="panel-body">
     
     <!-- Product -->
             ';

@@ -4,7 +4,7 @@ include_once APPPATH."libraries/Templates.php";
 
 class ProductsController extends CI_Controller{
     
-
+    
     public function viewProducts()
     {
               $this->load->view('templates/config');
@@ -40,13 +40,12 @@ class ProductsController extends CI_Controller{
     public function refreshProducts()
     {
         //data comes in as JSON, post
-        //$this->buildQuery(json_decode($this->input->post("value")));
-        //reflection method if has type brand or price, push back 'brand+=+value AND', trim off AND at the end
         
-        //SELECT * FROM products WHERE 
         $result = $this->buildQuery(json_decode($this->input->post("value"),true));
-
-        var_dump($result);
+        $html = Templates::getProductList($result);
+        $ajaxResponse = json_encode($html);
+        echo $ajaxResponse;
+        
     }
     
     //move into products model
@@ -54,9 +53,6 @@ class ProductsController extends CI_Controller{
     {
         $this->load->model('Product');
         $result = "";
-        //if empty, get *, DONT remove AND at end
-        //if contains brand, add brand and keypair with AND on the end
-            //remove AND at end, pass in
         
         if("normal" == $json)
         {
@@ -64,7 +60,17 @@ class ProductsController extends CI_Controller{
         }
         else if(isset($json[0]["type"]))
         {
-            var_dump($json);
+            $query = "SELECT productname, productdescription, productprice, imagepath FROM product WHERE ";
+            //make an array, pass through as query
+            for($i = 0; $i < sizeof($json); $i++)
+            {
+                $query .= $json[$i]["type"] . "='". $json[$i]["value"]."'";
+                if($i != sizeof($json) -1)
+                {
+                    $query .= " AND ";
+                } 
+            }
+            $result = $this->Product->getProductFilteredList($query);
         }
         else
         {

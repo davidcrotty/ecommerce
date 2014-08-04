@@ -15,12 +15,13 @@ class Product extends CI_Model implements SqlOps{
      */
     public function getCountOfProductsByBrand()
     {
-        $query = $this->db->query("SELECT * FROM countofproductsbybrand");
+        $query = $this->db->query("SELECT * FROM countofproductsbrandbybrand");
         
         $countOfproducts = array();
         foreach($query->result() as $row)
         {
-            $temp = array("productbrand"=>$row->productbrand,"Count"=>$row->Count);
+            
+            $temp = array("productbrand"=>$row->brand,"Count"=>$row->Count);
             array_push($countOfproducts,$temp);
         }
         
@@ -45,14 +46,29 @@ class Product extends CI_Model implements SqlOps{
         
     }
     
+    public function getProductFilteredList($statement)
+    {
+       $query = $this->db->query($statement);
+       $productList = array();
+       $index = 0; //needs to be associative for JSON 
+        foreach ($query->result() as $row) {
+            $temp = new ProductBO('',$row->productname,'',$row->productprice,'','','','','',$row->productdescription,'',$row->imagepath);
+            array_push($productList, $temp);
+            $productList[$index] = $temp;
+            $index++;
+        }
+
+        return $productList; 
+    }
+    
     public function getProductList($type)
     {
-        $query = $this -> db -> query('SELECT productname, productdescription, productprice FROM product WHERE producttype="'.$type.'"');
+        $query = $this -> db -> query('SELECT productname, productdescription, productprice, imagepath FROM product WHERE producttype="'.$type.'"');
 
         $productList = array();
                 
         foreach ($query->result() as $row) {
-            $temp = new ProductBO('',$row->productname,'',$row->productprice,'','','','','',$row->productdescription,'');
+            $temp = new ProductBO('',$row->productname,'',$row->productprice,'','','','','',$row->productdescription,'',$row->imagepath);
             array_push($productList, $temp);
         }
 

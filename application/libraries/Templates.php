@@ -88,37 +88,44 @@ class Templates {
     }
 
     /*
-     * Get available products for the list view
+     * Get available products for the list view, note JSON response will only take associative arrays
      */
     public static function getProductList($data)
     {
-        $html = array();
         
-            foreach ($data as $value) {
+        $html = array();
+            
+            $index = 0;
+            foreach ($data as $value) { 
             $temp = ' <div class="panel panel-default">
         <div class="panel-body">
             <div class="row-lg-6">
-                <div class="col-lg-6">
-                    Image
+                <div class="col-lg-5">
+
+                    <img src='.base_url()."/assets/img/".$value->getProductimg().'>
                 </div>
-                <div class="col-lg-6">
-                    '.$value->getProductName().' '.$value->getProductdescription().'
+                <div class="col-lg-4">
+                    '.$value->getProductName().'<br>'.$value->getProductdescription().'
+                </div>
+                <div class="col-lg-2">
+                    <h3>&#163;'.$value->getProductPrice().'</h3>
                 </div>
             </div>
             <div class="row-lg-6">
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <br>
                     <button type="submit" class="btn btn-success">Add to cart</button>
                 </div>
             </div>
          </div>
         </div>';
-            array_push($html, $temp);
+            //array_push($html, $temp);
+            $html[$index] = $temp;
+            $index++;
      }
-
         return $html;        
     }
 }
