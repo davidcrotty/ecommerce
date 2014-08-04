@@ -1,0 +1,100 @@
+.customli{
+    margin-top: 13px   
+   }
+
+.custombutton{
+    margin-left: 15px   
+}
+
+.customtitle{
+   color:white; 
+}
+
+.customlistbg{
+    background: #5E9DC8 ;
+    color: #FFFFFF;
+}
+
+.customspacing{
+    padding-top: 30px   
+}
+
+.customright{
+
+ float:right;
+ clear:both;
+}
+
+.customcenter{
+    text-align:center;  
+}
+
+.customdisabled{
+    color:#DCDCDC;   
+}
+
+.custompanelactive{
+    background-color: #2E8AE5;   
+}
+
+.custompanelinactive{
+    background-color: rgba(46,180,229,0.5);   
+}
+
+.customformpad{
+    margin-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.customIndent{
+text-indent:15px;
+padding:5px;
+}
+
+span.empty_fill {
+    display:block;
+    overflow:hidden;
+    width:100%;
+    height:100%;
+}
+
+.fuckingwork{
+    color:#FFFFFF !important;
+    background-color: #2E8AE5 !important;
+}
+
+.panel-heading .pagination-panel, 
+.panel-footer .pagination-panel {
+    margin: -11px -16px; /* Based off default .panel-heading padding */
+    
+    > li {
+        > a,
+        > span {
+            padding: 10px 18px; /* Based off default .panel-heading padding */
+        }
+    }
+    
+}
+ 
+.panel-heading .pagination-panel {
+    > li {
+        &:last-child {
+            > a,
+            > span {
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
+}
+ 
+.panel-footer .pagination-panel {
+    > li {
+        &:last-child {
+            > a,
+            > span {
+                border-top-right-radius: 0;
+            }
+        }
+    }
+}
