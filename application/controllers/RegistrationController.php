@@ -4,12 +4,13 @@ include_once APPPATH . 'libraries/Templates.php';
 include_once APPPATH . 'libraries/ValidationCheck/ValidationForm.php';
 include_once APPPATH . 'libraries/CustomerBO.php';
 
+
 class RegistrationController extends CI_Controller {
 
     //add hook here, if session is empty redirect to register
 
     /*
-     * Singleton
+     * Singleton for accessing CI_Controller functionality outside the framework
      */
     public static function getInstance() {
         $instance = &get_instance();
@@ -50,6 +51,10 @@ class RegistrationController extends CI_Controller {
         $this -> load -> view('templates/footer');
     }
 
+    /*
+     * TODO
+     * Second page, INCOMPLETE function will filter out the second page for server side validation while using the same url client side
+     */
     public function registerBilling() {
         //if register complete, from singleton, carry on
         //singleton WONT work, as when a process dies, so does the singleton, resulting in everything below being false
@@ -96,7 +101,10 @@ class RegistrationController extends CI_Controller {
         //if all other stages complete (session)
             //Submit to db
     }
-
+    
+    /*
+     * Performs model validation
+     */
     public function validate() {
         $this -> load -> model('Customer');
 

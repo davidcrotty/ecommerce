@@ -5,8 +5,9 @@ include_once APPPATH."libraries/ValidationCheck/ValidationForm.php";
 
 class Customer extends CI_Model implements SqlOps{
 
-    //private $validator; //used to get the ValidationForm instance
-
+    /*
+     * When called loads the bcrypt module for password hashing
+     * */
 	function __construct() {
 		parent::__construct();
 		$this -> load -> database();
@@ -14,6 +15,9 @@ class Customer extends CI_Model implements SqlOps{
 		
 	}
 
+    /*
+     * Loads all customers
+     * */
 	function getCustomers() {
 		$query = $this -> db -> query('SELECT * FROM customer');
 
@@ -28,6 +32,9 @@ class Customer extends CI_Model implements SqlOps{
 
 	}
 
+    /*
+     * Loads a specific customer
+     * */
 	function getCustomerById($id) {
 		$query = $this -> db -> query('SELECT * FROM customer WHERE customerid=' . $id);
 		
@@ -58,6 +65,9 @@ class Customer extends CI_Model implements SqlOps{
 		return $cust;
 	}
     
+    /*
+     * Insert a customer into the db, hash the password for security using bcrypt module
+     */
 	public function insert($object){
 		
 		$hash = $this->bcrypt->hash_password($object->getPassword());
@@ -119,6 +129,9 @@ class Customer extends CI_Model implements SqlOps{
 		
 	}
 
+    /*
+     * Email validation
+     */
     public static function validateEmail($email)
     {
         $instance = ValidationForm::getInstance();
@@ -134,6 +147,9 @@ class Customer extends CI_Model implements SqlOps{
         }
     }
     
+    /*
+     * Password validation
+     */
     public static function validatePassword($password)
     {
         $pattern = '/^.*(?=.{4,10})(?=.*\d)(?=.*[a-zA-Z]).*$/';
@@ -152,6 +168,9 @@ class Customer extends CI_Model implements SqlOps{
         
     }
     
+     /*
+     * Password match validation
+     */
     public static function verifyPassword($password,$repassword)
     {
         $instance = ValidationForm::getInstance();
@@ -167,6 +186,9 @@ class Customer extends CI_Model implements SqlOps{
         }
     }
     
+     /*
+     * standard field validation
+     */
     public static function basicInput($input)
     {
         if($input == '')
@@ -178,6 +200,7 @@ class Customer extends CI_Model implements SqlOps{
         }
     }
     
+    //TODO, postcode validation
     public static function validatePostcode($postcode)
     {
         

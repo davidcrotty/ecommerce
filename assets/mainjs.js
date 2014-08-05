@@ -24,6 +24,9 @@ $(document).ready(function(){
     
     var bgcol = $('.jumbohover').css('backgroundColor');
     
+    /*
+     * homepage items hover
+     */
     $('.jumbohover').hover(function(){
         $(this).animate({backgroundColor:'#FFFFFF',color:'#000000'}, 'slow');
             
@@ -33,6 +36,9 @@ $(document).ready(function(){
     
     });
     
+    /*
+     * Menu hover function and html
+     */
     var hoverOnce = false;
     var $computersPanel = $('<li class="list-group-item customlistbg hoverItem">Computers<span class="customright"> <i class="icon-chevron-right icon-medium"></i></span></li>'); 
     
@@ -58,6 +64,9 @@ $(document).ready(function(){
         
     });
     
+    /*
+     * Animations on menu mouse over
+     */
     $($computersPanel).hover(function(){
         $(this).animate({backgroundColor:'#FFFFFF',color:'#000000'}, 'slow');
             
@@ -99,8 +108,7 @@ $(document).ready(function(){
     
     var $passwordSuccess = $('<br><div class="alert alert-success" role="alert"><a href="#"class="alert-link">Valid password</a></div>');
     
-    //WARNING backspace DOESN'T trigger the textbox even
-    //********************FIX************************
+	//TODO, re do validation method with bootstrap, also replace keypress with keyup (Doesn't record backspace)
     $('#exampleInputPassword1').keypress(function(){
         
         
@@ -120,7 +128,7 @@ $(document).ready(function(){
         
     });
     
-    //Note, use AJAX to enable/disable forms - more reliable, less duplicate code?
+    //Note, use AJAX to enable/disable forms - more reliable, reuse of code
     //(as server side validation will still be required)
     
     $(':checkbox').change(function(){
@@ -136,6 +144,7 @@ $(document).ready(function(){
     });
     //array consisting of all elements pertaining .custom indent
     
+    //product menu colour hover
     $(".customIndent").hover(function(){
             //check array for html match
             //do nothing if true
@@ -152,6 +161,7 @@ $(document).ready(function(){
     	
     };
     
+    //activate selected filter on product menu for user feedback
     $("div p").click(function(){
 
         if($(this).hasClass("sorter"))
@@ -182,7 +192,8 @@ $(document).ready(function(){
         
 
     });
-	
+		
+		//username ajax validation, TODO ensure it checks existing usernames in the database
 	    $('#usernameInput').keyup(function(){
     
         //send ajax request
@@ -232,6 +243,7 @@ $(document).ready(function(){
 			return mainReturnValue;
 		};
     	
+    	//send ajax request to server to dynamically filter products
     	$('.ajaxFilter').click(function(){
 				
 				//need array to push the query object to
@@ -297,6 +309,7 @@ $(document).ready(function(){
     		});
     	});
     	
+    	//password validation
     	$('#passwordInput').keyup(function(){
     		
     		$.ajax({
@@ -327,6 +340,7 @@ $(document).ready(function(){
     		
     	});
     	
+    	//password verify validation
     	$('#repasswordInput').keyup(function(){
     		
     		$.ajax({

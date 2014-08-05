@@ -5,14 +5,9 @@ include_once APPPATH."libraries/Templates.php";
 class ProductsController extends CI_Controller{
     
     
-    public function viewProducts()
-    {
-              $this->load->view('templates/config');
-              $this->load->view('templates/inactiveNav');
-              $this->load->view('templates/products.php');
-              $this->load->view('templates/footer.php');
-    }
-    
+    /*
+     * Loads the products content with dynamic sidebar
+     */
     public function getSideBar()
     {
         $this->load->model('Product');
@@ -26,6 +21,7 @@ class ProductsController extends CI_Controller{
         $productsList = $this->buildQuery("normal"); //used to identify all products
         $productsHtml = Templates::getProductList($productsList);
         
+        //TODO retreive rest of sort filter items, logic in place however
         
         //make multi array for each subtype
         $data = array('products'=>$htmlArray,'processor'=>$processorArray,'productsList'=>$productsHtml);
@@ -37,6 +33,9 @@ class ProductsController extends CI_Controller{
         $this->load->view('templates/footer.php');        
     }
     
+    /*
+     * Ajax call from javascript, determines which products are to be displayed
+     */
     public function refreshProducts()
     {
         //data comes in as JSON, post
@@ -48,7 +47,14 @@ class ProductsController extends CI_Controller{
         
     }
     
-    //move into products model
+    //TODO, move into products model
+    
+    /*
+     * Builds a Retreive query based on either a javascript response or
+     * json which ONLY contains column names to build the query, preventing injection.
+     * 
+     * If 'normal' is given all products are retreived
+     */
     private function buildQuery($json)
     {
         $this->load->model('Product');

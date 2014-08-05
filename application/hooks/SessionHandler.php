@@ -9,6 +9,9 @@ class SessionHandlerHook{
 
     }
     
+    /*
+     * TODO Hook test, code not yet in use, will later be used for defining the Nav bar if the user is logged in
+     */
      public function checkAccountCompletion()
     {
         //check session completion versus page link

@@ -6,13 +6,14 @@ class Address extends CI_Model implements SqlOps{
 		parent::__construct();
 		$this -> load -> database();
 	}
-	
+	//TODO perform query and return address
 	public function getAddressById($id)
 	{
 		
 		
 	}
 	
+    //insert operation
 	public function insert($object)
 	{
 		$result = false;

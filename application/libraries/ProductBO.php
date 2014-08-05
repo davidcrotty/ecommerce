@@ -15,7 +15,7 @@ class ProductBO {
     private $productdescription;
     private $taxid;
     private $productimg;
-    
+
     //from memory
     public function __construct($producttype,$productname,$productbrand,$productprice,$processor,$RAM,$graphics,$onoffer,$stock,$productdescription,$taxid,$productimg)
     {

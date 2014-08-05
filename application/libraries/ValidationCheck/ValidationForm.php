@@ -16,6 +16,7 @@ class ValidationForm {
         $this->CI->load->model('Customer');
     }
 
+    //TODO remove, redundant function Singleton does not work during a page refresh as process is killed
     public static function getInstance() {
 
         if (null == ValidationForm::$instance ) {

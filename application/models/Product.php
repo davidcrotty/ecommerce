@@ -11,7 +11,7 @@ class Product extends CI_Model implements SqlOps{
     }
     
     /**
-     * Load View
+     * return SQL view of brands
      */
     public function getCountOfProductsByBrand()
     {
@@ -29,7 +29,7 @@ class Product extends CI_Model implements SqlOps{
     }
     
     /**
-     * Load View
+     * return SQL view of processors
      */    
     public function getCountOfProductsByProcessor()
     {
@@ -46,6 +46,9 @@ class Product extends CI_Model implements SqlOps{
         
     }
     
+    /*
+     * Uses built query to retreive productList data
+     * */
     public function getProductFilteredList($statement)
     {
        $query = $this->db->query($statement);
@@ -61,6 +64,9 @@ class Product extends CI_Model implements SqlOps{
         return $productList; 
     }
     
+    /*
+     * Retreives all products of a particular type ie: Computers, monitors etc
+     * */
     public function getProductList($type)
     {
         $query = $this -> db -> query('SELECT productname, productdescription, productprice, imagepath FROM product WHERE producttype="'.$type.'"');
@@ -75,6 +81,9 @@ class Product extends CI_Model implements SqlOps{
         return $productList;
     }
     
+    /*
+     * Get a specific product
+     * */
     public function getProduct($id)
     {
         $query = $this -> db -> query('SELECT * FROM customer WHERE customerid=' . $id);
@@ -88,30 +97,9 @@ class Product extends CI_Model implements SqlOps{
         return $prod;
     }
     
-    public function buildFilter($keyword)
-    {
-        $keyword = "productbrand.asus";
-        //pass in keypairs, ie brand = asus
-        $query = 'SELECT productid, productname, productdescription, productprice FROM product WHERE ';
-        //create filter list to prevent sql injection
-        $filter = explode('.',$keyword);
-         
-        if($filter[0] != "productprice")
-        {
-           $appendSQL = $filter[0] . ' LIKE ' . "'".$filter[1]."'"; 
-        }else if($filter[0] == "productprice")
-        {
-           //use between 
-        }
-        
-        //if session contains non empty sql filter, prepend with AND
-        //Add to Session
-        echo $query.$appendSQL;
-    die();
-        //Session["sqlfilter"] + keyword
-
-    }
-    
+    /*
+     * SqlOps interface 
+     */
     public function insert($object)
     {
         

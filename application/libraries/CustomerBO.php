@@ -27,6 +27,7 @@ class CustomerBO {
 		
 	}
 	
+    //pull from DB only
 	public static function fromHash($row)
 	{
 		
@@ -36,6 +37,9 @@ class CustomerBO {
 		return $result;
 	}
 	
+    /*
+     * hash this class, like a tostring function but toarray instead
+     */
 	public function toHash()
 	{
 		$result = array("customerId"=>$this->customerId,"salutation"=>$this->salulation,"firstName"=>$this->firstName,"lastName"=>$lastName,"telephone"=>$telephone,"email"=>$email,"password"=>$password);

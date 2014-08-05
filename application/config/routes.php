@@ -38,6 +38,9 @@
 |
 */
 
+/*
+ * URL route simplification,
+ **/
 $route['default_controller'] = "NavigationController/home";
 $route['404_override'] = '';
 

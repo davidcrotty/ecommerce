@@ -31,6 +31,9 @@ class AddressBO{
 		return $instance;
 	}
 	
+    /*
+     * hash this class, like a tostring function but toarray instead
+     */
 	public function toHash()
 	{
 		$result = array("addressid"=>$this->addressid,"type"=>$this->type,"address1"=>$this->address1,"address2"=>$this->address2,"city"=>$this->city,"county"=>$this->county,"postcode"=>$this->postcode);

@@ -8,6 +8,9 @@ require_once APPPATH.'/libraries/SqlOps.php';
 
 class CustomerController extends CI_Controller
 {
+    /*
+     * Testing adding a new customer with an address then retreiving the customers address based on ID
+     */
 	public function customerView()
 	{
 		$this->load->model('Customer');
@@ -15,7 +18,7 @@ class CustomerController extends CI_Controller
 		
         
 		$add = new addressBO("delivery","33","dfgdgf","york","ddd","45466");
-		$cust = new CustomerBO("mr","secure","password","07","aa@","eee");
+		$cust = new CustomerBO("mr","Name","password","07","aa@","eee");
         $cust->addAddress($add);
         
         //$this->Customer->insertCustomerAddresses($cust);
@@ -28,26 +31,6 @@ class CustomerController extends CI_Controller
 		var_dump($result);
         
 	}
-    
-    public function products()
-    {
-        $this->load->model('Product');
-        //$this->Product->getProductList();
-        $this->Product->buildFilter("a");
-    }
-	
-    public function homePage()
-    {
-        //$this->load->view('home');
-        //settings config
-        $this->load->view('templates/config');
-        $this->load->view('templates/footer');
-        //nav
-
-        //dynamic content
-        
-        //footer and closing
-    }
     
 }
 

@@ -2,8 +2,12 @@
 
 class Templates {
 
+    //template class, for retreiving/foreaching through data based on data fed in/validation results
     //TODO, add in so they may take in a boolean and return an error field or not
 
+    /*
+     * Gets the correct password input field based on validation result
+     * */
     public static function getPasswordInput($error) {
         if ($error) {
             return '                                <label for="passwordInput" style="color:red"> Password*</label>
@@ -21,6 +25,9 @@ class Templates {
 
     }
 
+    /*
+     * Gets the correct repassword input field based on validation result
+     * */
     public static function getRePasswordInput($error) {
         if ($error) {
             return '                                <label for="repasswordInput" style="color:red">Re-enter password*</label>
@@ -38,6 +45,9 @@ class Templates {
 
     }
 
+    /*
+     * Gets the correct username input field based on validation result
+     * */
     public static function getUsernameInput($error) {
         if ($error) {
             return '<label for="usernameInput" style="color:red">Email address*</label>
@@ -55,6 +65,9 @@ class Templates {
 
     }
 
+    /*
+     * Deliver warning header telling user entered data in wrong
+     * */
     public static function getWarningHeader($error) {
         if ($error) {
             return '<br><div class="alert alert-danger" role="alert"><a href="#" class="alert-link">Please check the marked fields and submit again</a></div>';
@@ -63,7 +76,9 @@ class Templates {
         }
     }
 
-    //take in type of data (query)
+    /*
+     * Generates the Brand part of product sidebar
+     * */
     public static function getProductBrand($data) {
         $html = array();
 
@@ -75,6 +90,9 @@ class Templates {
         return $html;
     }
 
+    /*
+     * Generates the Processor part of product sidebar
+     * */
     public static function getProductProcessor($data)
     {
         $html = array();

@@ -2,7 +2,6 @@
 
 class NavigationController extends CI_Controller{
     
-    private $activeArray; //used to determine which link is highlighted as active
     
     public function __construct()
     {
@@ -10,6 +9,9 @@ class NavigationController extends CI_Controller{
         
     }
     
+    /*
+     * navigates to home page
+     */
     public function home()
     {
         $data = array("about"=>'<li><a class="customhover" href="about">About</a></li>',
@@ -22,6 +24,9 @@ class NavigationController extends CI_Controller{
         $this->load->view('templates/footer');
     }
     
+        /*
+     * navigates to about page
+     */
     public function about()
     {
         //Keys are converted into variables
@@ -36,6 +41,9 @@ class NavigationController extends CI_Controller{
         $this->load->view('templates/footer'); 
     }
     
+    /*
+     * navigates to FAQ page
+     */
     public function FAQ()
     {
         $data = array("about"=>'<li><a class="customhover" href="about">About</a></li>',
@@ -48,7 +56,9 @@ class NavigationController extends CI_Controller{
         $this->load->view('templates/faq');
         $this->load->view('templates/footer'); 
     }
-    
+        /*
+     * navigates to contact page
+     */
     public function contact()
     {
         $data = array("about"=>'<li><a class="customhover" href="about">About</a></li>',
@@ -62,6 +72,9 @@ class NavigationController extends CI_Controller{
         $this->load->view('templates/footer');       
     }
     
+     /*
+     * navigates to login page
+     */
     public function login()
     {
          $data = array("about"=>'<li><a class="customhover" href="about">About</a></li>',
