@@ -14,13 +14,15 @@ class Templates {
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="password" id="passwordInput" placeholder="Password">
                                     <span class="input-group-addon">&#160;</span>
-                                </div>';
+                                </div>
+                                <br>';
         } else {
             return '                                <label for="passwordInput"> Password</label>
-                                <div class="input-group">
+                                <div class="input-group" id="passwordInputDiv">
                                     <input type="password" class="form-control" name="password" id="passwordInput" placeholder="Password">
                                     <span class="input-group-addon">&#160;</span>
-                                </div>';
+                                </div>
+                                <br>';
         }
 
     }
@@ -34,13 +36,15 @@ class Templates {
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="passwordvalid" id="repasswordInput" placeholder="Re-enter password">
                                     <span class="input-group-addon">&#160;</span>
-                                </div>';
+                                </div>
+                                <br>';
         } else {
             return '                                <label for="repasswordInput">Re-enter password</label>
-                                <div class="input-group">
+                                <div class="input-group" id="repasswordInputDiv">
                                     <input type="password" class="form-control" name="passwordvalid" id="repasswordInput" placeholder="Re-enter password">
                                     <span class="input-group-addon">&#160;</span>
-                                </div>';
+                                </div>
+                                <br>';
         }
 
     }
@@ -50,17 +54,20 @@ class Templates {
      * */
     public static function getUsernameInput($error) {
         if ($error) {
-            return '<label for="usernameInput" style="color:red">Email address*</label>
+            return '
+            <br><label for="usernameInput" style="color:red">Email address*</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="username" id="usernameInput" placeholder="Email address">
                                     <span class="input-group-addon customEmailStyle">&#160;</span>
-                                </div>';
+                                </div>
+                                <br>';
         } else {
-            return '<label for="usernameInput">Email address</label>
-                                <div class="input-group">
+            return '<br><label for="usernameInput">Email address</label>
+                                <div class="input-group" id="usernameInputDiv">
                                     <input type="text" class="form-control" name="username" id="usernameInput" placeholder="Email address">
                                     <span class="input-group-addon customEmailStyle">&#160;</span>
-                                </div>';
+                                </div>
+                                <br>';
         }
 
     }

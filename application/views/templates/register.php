@@ -47,22 +47,16 @@ echo'
                             <h3 class="panel-title"><b>About you</b></h3>
                         </div>
                         <div class="panel-body">
-                            '.$flashWarning.'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec mollis lectus. Fusce laoreet augue.</p>
-                                <form action="registerBilling" method="post">
-                                '.$username.'
-                                <div class="customEmailValidation">
-                                </div>
-                                <br>
-                                <br>
-'.$password.'
-                                <div class="customPasswordValidation">
-                                </div>
-                                <br>
-'.$repassword.'
-                                <div class="customRePasswordValidation">
-                                </div>
-                                <br>
-                                <button type="submit" class="btn btn-success">Next</button>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec mollis lectus. Fusce laoreet augue.</p>
+                                <form action="register" method="post">';
+                                foreach($form as $value)
+                                {
+                                    echo $value;
+                                } 
+                                echo '
+                                
+                                
+                                <button type="submit" name="submission" value="aboutyou" class="btn btn-success">Next</button>
                             </form>
                         </div>
                 </div>

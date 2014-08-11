@@ -1,7 +1,9 @@
 <?php
 //twig symphony - templating framework
 include_once APPPATH . 'libraries/Templates.php';
+include_once APPPATH . 'libraries/TemplateClasses/InputForm.php';
 include_once APPPATH . 'libraries/ValidationCheck/ValidationForm.php';
+include_once APPPATH . 'libraries/validation/FormValidator.php';
 include_once APPPATH . 'libraries/CustomerBO.php';
 
 
@@ -9,6 +11,11 @@ class RegistrationController extends CI_Controller {
 
     //add hook here, if session is empty redirect to register
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
     /*
      * Singleton for accessing CI_Controller functionality outside the framework
      */
@@ -23,34 +30,58 @@ class RegistrationController extends CI_Controller {
      * parts
      */
     public function register() {
-
-        
-        $instance = ValidationForm::getInstance();
-        //if redirect true, grab from Session a valid field object and plug into array for passing here
-        if ($this -> session -> userData('redirect')) {
-            $username = $instance -> getUsernameInput($this -> input -> post('username'));
-            $password = $instance -> getPasswordInput($this -> input -> post('password'));
-            $repassword = $instance -> getRePasswordInput($this -> input -> post('password'), $this -> input -> post('passwordvalid'));
-
-            $warning = true; //to show the use the error message
-            $this -> session -> set_userdata('redirect', false);
-        } else {
-            $username = Templates::getUsernameInput(false);
-            //instance get username input
-            $password = Templates::getPasswordInput(false);
-            $repassword = Templates::getRepasswordInput(false);
-            $warning =false;
-        }
-        $data = array('username' => $username, 'password' => $password, 'repassword' => $repassword,'flashWarning'=>Templates::getWarningHeader($warning));
-
+        $outputHtml = array("form"=>"");
         $this -> load -> view('templates/config');
         $this -> load -> view('templates/inactiveNav');
-        //call a class to load the appropriate
-        $this -> load -> view('templates/register', $data);
-        //add flash into array too
+        
+        var_dump($this->session->userdata);
+
+        if($this->input->post('submission') && $this->session->userdata('registerpage') !== TRUE) //&& session type is X
+        {
+            $formValidator = new FormValidator($this->input->post());
+            $output = $formValidator->validate();
+                if($output[3])
+                {
+                    array_pop($output);    
+                    $this->session->set_userdata('registerpage',array("registerpage"=>"billing"));               
+                    $this->session->set_userdata('customer',array('customer'=>new CustomerBO('','','','',$this->input->post('username'),$this->input->post('password'))));
+                    //$this->session->set_userdata("anArray",array("anId"=>"test"));
+                    $this->billingPage($outputHtml);
+                }else
+                {                
+                    array_pop($output);
+                    $outputHtml["form"] = $output;
+                    $this -> load -> view('templates/register',$outputHtml);
+                }
+        }
+        else if($this->session->userdata('registerpage') !== FALSE)
+        {
+           //array needs to be made passing in form objects, result HAS to be html
+           $this->billingPage($outputHtml);
+        }
+        else
+        {
+            $outputHtml["form"] = array(Templates::getUsernameInput(false),Templates::getPasswordInput(false),Templates::getRePasswordInput(false));
+            //call a class to load the appropriate
+            $this -> load -> view('templates/register',$outputHtml);
+            //add flash into array too
+                        
+        }
+
         $this -> load -> view('templates/footer');
     }
 
+    private function billingPage($outpuHtml)
+    {
+           $outputHtml["form"] = array(InputForm::getValid("firstNameInput", "text", "firstName"));
+           $this->load->view('templates/billing',$outputHtml);
+    }
+
+    public function validateForm($hashMap)
+    {
+        var_dump($hashMap);
+    }
+    
     /*
      * TODO
      * Second page, INCOMPLETE function will filter out the second page for server side validation while using the same url client side

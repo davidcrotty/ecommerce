@@ -47,14 +47,13 @@ echo '
                         <div class="panel-body">
                             <br>
                             <br>
-                            <form role="form">
-                                
-                                    <label for="usernameInput">First name</label>
-                                <div class="input-group">
-                                    <input id="validationFirstName"type="text" class="form-control" placeholder="First name">
-                                    <span class="input-group-addon">T</span>
-                                </div>
-                                <div class="firstnamevalidation">
+                            <form role="form">';
+                            
+                            foreach($form as $value)
+                            {
+                                echo $value;
+                            }
+                            echo '<div class="firstnamevalidation">
                                 </div>
                                 <br>
                                     <label for="usernameInput">Last name</label>

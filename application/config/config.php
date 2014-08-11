@@ -246,7 +246,7 @@ $config['encryption_key'] = 'ycIzuYTJ9iIsydrw1V5Gfi90vVh6h2gC'; //encrypt sessio
 */
 $config['sess_cookie_name']		= 'ci_session';
 $config['sess_expiration']		= 7200;
-$config['sess_expire_on_close']	= FALSE;
+$config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= FALSE;
 $config['sess_use_database']	= FALSE;
 $config['sess_table_name']		= 'ci_sessions';

@@ -103,30 +103,30 @@ $(document).ready(function(){
     
     });
     
-    var $someString = "Your password must contain at least 5 characters and contain a number";
-    var $passwordRequire = $('<br><div class="alert alert-danger" role="alert"><a href="#" class="alert-link">'+$someString+'</a></div>');
+    // var $someString = "Your password must contain at least 5 characters and contain a number";
+    // var $passwordRequire = $('<br><div class="alert alert-danger" role="alert"><a href="#" class="alert-link">'+$someString+'</a></div>');
+//     
+    // var $passwordSuccess = $('<br><div class="alert alert-success" role="alert"><a href="#"class="alert-link">Valid password</a></div>');
     
-    var $passwordSuccess = $('<br><div class="alert alert-success" role="alert"><a href="#"class="alert-link">Valid password</a></div>');
-    
-	//TODO, re do validation method with bootstrap, also replace keypress with keyup (Doesn't record backspace)
-    $('#exampleInputPassword1').keypress(function(){
-        
-        
-        
-        var $input = $('#exampleInputPassword1').val();
-        if($input.match(/\w{5}\d*/))
-        {
-            $($passwordRequire).hide();
-            $('.customAdding').append($passwordSuccess);
-            $($passwordSuccess).show();
-        }else{
-            $($passwordSuccess).hide();
-            $('.customAdding').append($passwordRequire);
-            $($passwordRequire).show();
-        }
-        
-        
-    });
+	// //TODO, re do validation method with bootstrap, also replace keypress with keyup (Doesn't record backspace)
+    // $('#exampleInputPassword1').keypress(function(){
+//         
+//         
+//         
+        // var $input = $('#exampleInputPassword1').val();
+        // if($input.match(/\w{5}\d*/))
+        // {
+            // $($passwordRequire).hide();
+            // $('.customAdding').append($passwordSuccess);
+            // $($passwordSuccess).show();
+        // }else{
+            // $($passwordSuccess).hide();
+            // $('.customAdding').append($passwordRequire);
+            // $($passwordRequire).show();
+        // }
+//         
+//         
+    // });
     
     //Note, use AJAX to enable/disable forms - more reliable, reuse of code
     //(as server side validation will still be required)
@@ -194,40 +194,40 @@ $(document).ready(function(){
     });
 		
 		//username ajax validation, TODO ensure it checks existing usernames in the database
-	    $('#usernameInput').keyup(function(){
-    
-        //send ajax request
-		
-		$.ajax({
-			//ajax class
-			url: "validate",
-			type: "post",
-			datatype: 'json',
-			data: "value="+$(this).val()+"&type=" + "email",
-			success:function(result){
-
-					//if result == false show bad html
-					var obj = jQuery.parseJSON(result);
-					if(obj.response == 1)
-					{
-						$('#usernameInput').next().css({backgroundColor:"#53a93f"});
-						$('#usernameInput').next().html('<i class="icon-check icon-1x" style="color:white"></i>');
-						$('.customEmailValidation').empty();
-						$('.customEmailValidation').html('<br><div class="alert alert-success">'+obj.errorCode+'</div>');	
-						//$('.customEmailValidation div').removeClass('alert-danger');
-					}else if(obj.response == 0)
-					{
-						$('#usernameInput').next().css({backgroundColor:"#ff8080"});
-						$('#usernameInput').next().html('<i class="icon-remove icon-1x" style="color:white"></i>');
-						$('.customEmailValidation').empty();
-						//$('.alert-success').remove();
-						$('.customEmailValidation').html('<br><div class="alert alert-danger">'+obj.errorCode+'</div>');		
-					}
-
-				}
-			});
-			
-    	});
+	    // $('#usernameInput').keyup(function(){
+//     
+        // //send ajax request
+// 		
+		// $.ajax({
+			// //ajax class
+			// url: "validate",
+			// type: "post",
+			// datatype: 'json',
+			// data: "value="+$(this).val()+"&type=" + "email",
+			// success:function(result){
+// 
+					// //if result == false show bad html
+					// var obj = jQuery.parseJSON(result);
+					// if(obj.response == 1)
+					// {
+						// $('#usernameInput').next().css({backgroundColor:"#53a93f"});
+						// $('#usernameInput').next().html('<i class="icon-check icon-1x" style="color:white"></i>');
+						// $('.customEmailValidation').empty();
+						// $('.customEmailValidation').html('<br><div class="alert alert-success">'+obj.errorCode+'</div>');	
+						// //$('.customEmailValidation div').removeClass('alert-danger');
+					// }else if(obj.response == 0)
+					// {
+						// $('#usernameInput').next().css({backgroundColor:"#ff8080"});
+						// $('#usernameInput').next().html('<i class="icon-remove icon-1x" style="color:white"></i>');
+						// $('.customEmailValidation').empty();
+						// //$('.alert-success').remove();
+						// $('.customEmailValidation').html('<br><div class="alert alert-danger">'+obj.errorCode+'</div>');		
+					// }
+// 
+				// }
+			// });
+// 			
+    	// });
     	
 		var findClass = function(mainFinder){
 			var mainReturnValue;
@@ -310,65 +310,65 @@ $(document).ready(function(){
     	});
     	
     	//password validation
-    	$('#passwordInput').keyup(function(){
-    		
-    		$.ajax({
-    		url: "validate",
-			type: "post",
-			datatype: 'json',
-			data: "value="+queryObject,
-			success:function(result){
-				console.log(result);
-				var obj = jQuery.parseJSON(result);
-					if(obj.response == 1)
-					{
-						$('#passwordInput').next().css({backgroundColor:"#53a93f"});
-						$('#passwordInput').next().html('<i class="icon-check icon-1x" style="color:white"></i>');
-						$('.customPasswordValidation').empty();
-						$('.customPasswordValidation').html('<br><div class="alert alert-success">'+obj.errorCode+'</div>');	
-					}else if(obj.response == 0)
-					{
-						$('#passwordInput').next().css({backgroundColor:"#ff8080"});
-						$('#passwordInput').next().html('<i class="icon-remove icon-1x" style="color:white"></i>');
-						$('.customPasswordValidation').empty();
-						$('.customPasswordValidation').html('<br><div class="alert alert-danger">'+obj.errorCode+'</div>');		
-					}
-				
-			}
-    			
-    		});
-    		
-    	});
-    	
-    	//password verify validation
-    	$('#repasswordInput').keyup(function(){
-    		
-    		$.ajax({
-    		url: "validate",
-			type: "post",
-			datatype: 'json',
-			data: "value="+$(this).val()+"&type=" + "repassword"+"&match="+$('#passwordInput').val(),
-			success:function(result){
-				var obj = jQuery.parseJSON(result);
-					if(obj.response == 1)
-					{
-						$('#repasswordInput').next().css({backgroundColor:"#53a93f"});
-						$('#repasswordInput').next().html('<i class="icon-check icon-1x" style="color:white"></i>');
-						$('.customRePasswordValidation').empty();
-						$('.customRePasswordValidation').html('<br><div class="alert alert-success">'+obj.errorCode+'</div>');	
-					}else if(obj.response == 0)
-					{
-						$('#repasswordInput').next().css({backgroundColor:"#ff8080"});
-						$('#repasswordInput').next().html('<i class="icon-remove icon-1x" style="color:white"></i>');
-						$('.customRePasswordValidation').empty();
-						$('.customRePasswordValidation').html('<br><div class="alert alert-danger">'+obj.errorCode+'</div>');		
-					}
-				
-			}
-    			
-    		});
-    		
-    	});
+    	// $('#passwordInput').keyup(function(){
+//     		
+    		// $.ajax({
+    		// url: "validate",
+			// type: "post",
+			// datatype: 'json',
+			// data: "value="+queryObject,
+			// success:function(result){
+				// console.log(result);
+				// var obj = jQuery.parseJSON(result);
+					// if(obj.response == 1)
+					// {
+						// $('#passwordInput').next().css({backgroundColor:"#53a93f"});
+						// $('#passwordInput').next().html('<i class="icon-check icon-1x" style="color:white"></i>');
+						// $('.customPasswordValidation').empty();
+						// $('.customPasswordValidation').html('<br><div class="alert alert-success">'+obj.errorCode+'</div>');	
+					// }else if(obj.response == 0)
+					// {
+						// $('#passwordInput').next().css({backgroundColor:"#ff8080"});
+						// $('#passwordInput').next().html('<i class="icon-remove icon-1x" style="color:white"></i>');
+						// $('.customPasswordValidation').empty();
+						// $('.customPasswordValidation').html('<br><div class="alert alert-danger">'+obj.errorCode+'</div>');		
+					// }
+// 				
+			// }
+//     			
+    		// });
+//     		
+    	// });
+//     	
+    	// //password verify validation
+    	// $('#repasswordInput').keyup(function(){
+//     		
+    		// $.ajax({
+    		// url: "validate",
+			// type: "post",
+			// datatype: 'json',
+			// data: "value="+$(this).val()+"&type=" + "repassword"+"&match="+$('#passwordInput').val(),
+			// success:function(result){
+				// var obj = jQuery.parseJSON(result);
+					// if(obj.response == 1)
+					// {
+						// $('#repasswordInput').next().css({backgroundColor:"#53a93f"});
+						// $('#repasswordInput').next().html('<i class="icon-check icon-1x" style="color:white"></i>');
+						// $('.customRePasswordValidation').empty();
+						// $('.customRePasswordValidation').html('<br><div class="alert alert-success">'+obj.errorCode+'</div>');	
+					// }else if(obj.response == 0)
+					// {
+						// $('#repasswordInput').next().css({backgroundColor:"#ff8080"});
+						// $('#repasswordInput').next().html('<i class="icon-remove icon-1x" style="color:white"></i>');
+						// $('.customRePasswordValidation').empty();
+						// $('.customRePasswordValidation').html('<br><div class="alert alert-danger">'+obj.errorCode+'</div>');		
+					// }
+// 				
+			// }
+//     			
+    		// });
+//     		
+    	// });
     
 
     
